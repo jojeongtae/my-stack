@@ -2,12 +2,9 @@ version: '3.8'
 
 services:
   web:
-    image: nginx:latest
+    image: jjeongtae/my-web-app:latest
     ports:
       - "8080:80"
-    volumes:
-      - ./html:/usr/share/nginx/html
-
 
   db:
     image: mariadb:latest
