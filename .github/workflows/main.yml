@@ -26,6 +26,7 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/my-web-app:latest
+          no-cache: true
 
       # 4. GCP 서버에 접속해서 배포 (SSH)
       - name: Deploy to GCP
