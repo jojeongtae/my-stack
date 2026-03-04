@@ -4,18 +4,31 @@ services:
   web:
     image: jjeongtae/my-web-app:latest
     ports:
-      - "80:80"
+      - "8080:80"
+    restart: always
+
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
 
   db:
-    image: mariadb:latest
+    image: mariadb:10.5
     environment:
-      MYSQL_ROOT_PASSWORD: password123
-      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: password
     volumes:
       - ./db_data:/var/lib/mysql
 
   adminer:
     image: adminer:latest
+    restart: always
     ports:
       - "8081:8080"
 
